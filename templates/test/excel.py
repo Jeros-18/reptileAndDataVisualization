@@ -79,11 +79,10 @@ def aa():
     sheet2 = workBook2.sheets()[0]
 
     aa=Counter(sheet2.col_values(4))
-    print(aa)
-    # Counter({'other': 7862, 'catering': 2605, 'ticket': 2486, 'hotel': 1343, 'meeting': 979, 'training': 617, 'guid': 407, 'party': 84})
+    print(aa) # Counter({'other': 7862, 'catering': 2605, 'ticket': 2486, 'hotel': 1343, 'meeting': 979, 'training': 617, 'guid': 407, 'party': 84})
     moduleName=sorted(set(aa))
-    print(moduleName)
-    print(moduleName[0])
+    print(moduleName) # ['catering', 'guid', 'hotel', 'meeting', 'other', 'party', 'ticket', 'training']
+    print(moduleName[0]) # catering
 
     otherTotal = 0
     cateringTotal = 0

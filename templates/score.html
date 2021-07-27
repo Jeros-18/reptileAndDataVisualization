@@ -71,9 +71,9 @@
       <div class="container">
 
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-            <div id="main" style="width: 100%;height:300px"></div>
+            <div id="main" style="width: 50%;height:300px"></div>
 
-            <div id="teamSettlementDetails" style="width: 100%;height:300px"></div>
+            <div id="teamSettlementDetails" style="width: 50%;height:300px"></div>
 
       </div>
     </section><!-- End Counts Section -->
@@ -82,6 +82,7 @@
     </section><!-- End Our Team Section -->
 
   <!--echart图标-->
+
   <!--豆瓣评分分布表开始-->
  <script type="text/javascript">
 var dom = document.getElementById("main");
@@ -126,10 +127,52 @@ if (option && typeof option === "object") {
  </script>
 <!--豆瓣评分分布表结束-->
 
+<script>
+    var chartDom = document.getElementById('teamSettlementDetails');
+var myChart = echarts.init(chartDom, 'dark');
+var option;
 
+option = {
+    title: {
+        text: '团队主要消费分部情况',
+        subtext: '团队结算明细',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+    },
+    series: [
+        {
+            name: '业务模块',
+            type: 'pie',
+            radius: '50%',
+            data: [
+                {value: {{cateringTotal}}, name: '{{moduleName[0]}}'},
+                {value: {{guidTotal}}, name: '{{moduleName[1]}}'},
+                {value: {{hotelTotal}}, name: '{{moduleName[2]}}'},
+                {value: {{meetingTotal}}, name: '{{moduleName[3]}}'},
+                {value: {{otherTotal}}, name: '{{moduleName[4]}}'},
+                {value: {{partyTotal}}, name: '{{moduleName[5]}}'},
+                {value: {{ticketTotal}}, name: '{{moduleName[6]}}'},
+                {value: {{trainingTotal}}, name: '{{moduleName[7]}}'}
+            ],
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
 
-
-
+option && myChart.setOption(option);
+</script>
   <!-- ======= Footer ======= -->
   <footer id="footer">
 

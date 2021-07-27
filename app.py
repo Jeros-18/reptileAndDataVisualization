@@ -17,6 +17,7 @@ def home():
     #return render_template("index.html")
     return index()
 
+
 @app.route('/score')
 def score():
     # 打开文件
@@ -34,7 +35,58 @@ def score():
 
 
 
-    return render_template("score.html",score= score,num=num)
+    workBook1 = xlrd.open_workbook('D:\\ProgramFiles\\docTest\excel\\TeamSettlementDetails.xls')
+    sheet1 = workBook1.sheets()[0]
+
+    aa = Counter(sheet1.col_values(4))
+    moduleName = []
+    # Counter({'other': 7862, 'catering': 2605, 'ticket': 2486, 'hotel': 1343, 'meeting': 979, 'training': 617, 'guid': 407, 'party': 84})
+    moduleName = sorted(set(aa))
+
+    otherTotal = 0
+    cateringTotal = 0
+    ticketTotal = 0
+    hotelTotal = 0
+    meetingTotal = 0
+    trainingTotal = 0
+    guidTotal = 0
+    partyTotal = 0
+
+    list = []
+    sheet1_nrows = sheet1.nrows  # 获得行数
+    for i in range(sheet1_nrows):  # 逐行打印sheet1数据
+        if sheet1.row_values(i)[4] == 'catering':
+            # print(sheet1.row_values(i)[6])
+            cateringTotal += sheet1.row_values(i)[6]
+        if sheet1.row_values(i)[4] == 'guid':
+            # print(sheet1.row_values(i)[6])
+            guidTotal += sheet1.row_values(i)[6]
+        if sheet1.row_values(i)[4] == 'ticket':
+            # print(sheet1.row_values(i)[6])
+            ticketTotal += sheet1.row_values(i)[6]
+        if sheet1.row_values(i)[4] == 'hotel':
+            # print(sheet1.row_values(i)[6])
+            hotelTotal += sheet1.row_values(i)[6]
+        if sheet1.row_values(i)[4] == 'meeting':
+            # print(sheet1.row_values(i)[6])
+            meetingTotal += sheet1.row_values(i)[6]
+        if sheet1.row_values(i)[4] == 'other':
+            # print(sheet1.row_values(i)[6])
+            otherTotal += sheet1.row_values(i)[6]
+        if sheet1.row_values(i)[4] == 'party':
+            # print(sheet1.row_values(i)[6])
+            partyTotal += sheet1.row_values(i)[6]
+        if sheet1.row_values(i)[4] == 'training':
+            # print(sheet1.row_values(i)[6])
+            trainingTotal += sheet1.row_values(i)[6]
+
+
+
+
+    return render_template("score.html", score=score, num=num, moduleName=moduleName, cateringTotal=cateringTotal,
+                           guidTotal=guidTotal,
+                           ticketTotal=ticketTotal, hotelTotal=hotelTotal, meetingTotal=meetingTotal,
+                           otherTotal=otherTotal, partyTotal=partyTotal, trainingTotal=trainingTotal)
 
 
 
